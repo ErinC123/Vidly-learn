@@ -13,14 +13,18 @@ namespace Vidly_learn.Models
         [Required]
         public string Name { get; set; }
         [Required]
+        [Display (Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
         [Required]
+        [Display (Name = "Added Date")]
         public DateTime AddedDate { get; set; }
         [Required]
+        [Display (Name = "Number in Stock")]
         public int NumInStock { get; set; }
-        [Required]
+
         public Genre Genre { get; set; }
         [Required]
+        [Display (Name = "Genre")]
         public byte GenreId { get; set; }
 
     }

@@ -24,6 +24,23 @@ namespace Vidly_learn.Controllers
             _context.Dispose();
         }
 
+        public ActionResult New()
+        {
+            var genres = _context.Genres.ToList();
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres
+            };
+            return View("MovieForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Movie movie)
+        {
+            _context.Movies.Add(movie); 
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Movies");
+        }
         // GET: Movies
         public ActionResult Index()
         {
