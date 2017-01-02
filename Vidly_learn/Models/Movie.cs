@@ -18,11 +18,14 @@ namespace Vidly_learn.Models
         [Required]
         [Display (Name = "Added Date")]
         public DateTime AddedDate { get; set; }
-        [Required]
+
+        [Range(1, 20)]
+        [Required(ErrorMessage = "The number must between 1 to 20.")]
         [Display (Name = "Number in Stock")]
         public int NumInStock { get; set; }
 
         public Genre Genre { get; set; }
+
         [Required]
         [Display (Name = "Genre")]
         public byte GenreId { get; set; }

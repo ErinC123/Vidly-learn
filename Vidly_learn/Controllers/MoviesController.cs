@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -29,14 +30,25 @@ namespace Vidly_learn.Controllers
             var genres = _context.Genres.ToList();
             var viewModel = new MovieFormViewModel
             {
+                Movie = new Movie(),
                 Genres = genres
             };
             return View("MovieForm", viewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel
+                {
+                    Movie = new Movie(),
+                    Genres = _context.Genres
+                };
+                return View("MovieForm", viewModel);
+            }
             if (movie.Id == 0)
             {
                 _context.Movies.Add(movie);
@@ -50,7 +62,15 @@ namespace Vidly_learn.Controllers
                 movieInDb.NumInStock = movie.NumInStock;
                 movieInDb.GenreId = movie.GenreId;
             }
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                Console.WriteLine(e);
+            }
+
             return RedirectToAction("Index", "Movies");
         }
         // GET: Movies
