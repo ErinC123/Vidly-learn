@@ -34,6 +34,7 @@ namespace Vidly_learn.Controllers
 			return View("CustomerForm", viewModel);
 		}
 		[HttpPost]
+        [ValidateAntiForgeryToken]
 		public ActionResult Save(Customer customer) //model binding
 		{
 			if (!ModelState.IsValid)
