@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using AutoMapper;
+using Vidly_learn.Dtos;
 
 namespace Vidly_learn.Models
 {
@@ -10,7 +12,7 @@ namespace Vidly_learn.Models
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var customer = (Customer) validationContext.ObjectInstance;
+            var customer = (Customer)validationContext.ObjectInstance;
 
             if (customer.MembershipTypeId == MembershipType.Unknown ||
                 customer.MembershipTypeId == MembershipType.PayAsYouGo)

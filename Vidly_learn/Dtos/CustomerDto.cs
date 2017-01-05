@@ -19,7 +19,7 @@ namespace Vidly_learn.Dtos
 
         public byte MembershipTypeId { get; set; }
 
-        [Min18YearsIfAMember]
+        //[Min18YearsIfAMember]
         public DateTime? Birth { get; set; }
     }
 }
