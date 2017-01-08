@@ -22,6 +22,8 @@ namespace Vidly_learn.Dtos
         [Required(ErrorMessage = "The number must between 1 to 20.")]
         public int NumInStock { get; set; }
 
+        public GenreDto genre { get; set; }
+
         [Required]
         public byte GenreId { get; set; }
     }
