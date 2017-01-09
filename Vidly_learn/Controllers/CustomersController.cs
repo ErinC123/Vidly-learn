@@ -64,7 +64,6 @@ namespace Vidly_learn.Controllers
 		// GET: Customers
 		public ActionResult Index()
 		{
-			
 			return View();
 		}
 		public ActionResult Details(int id)

@@ -25,6 +25,7 @@ namespace Vidly_learn.Controllers
             _context.Dispose();
         }
 
+        [Authorize]
         public ActionResult New()
         {
             var genres = _context.Genres.ToList();
@@ -76,7 +77,13 @@ namespace Vidly_learn.Controllers
         public ActionResult Index()
         {
             var movies = _context.Movies.Include(c => c.Genre).ToList();
-            return View(movies);
+
+            if (User.IsInRole("CanManageMovie"))
+                return View("List", movies);
+              
+            return View("ReadOnlyList", movies);
+            
+            
         }
 
         public ActionResult Details(int id)
